@@ -1,0 +1,38 @@
+from flask import Flask, render_template, request
+from sklearn.tree import DecisionTreeClassifier
+
+app = Flask(__name__)
+
+# Sample Data
+X = [
+    [30000, 650],
+    [50000, 750],
+    [25000, 600],
+    [80000, 800],
+    [40000, 700],
+    [20000, 550]
+]
+
+y = [0, 1, 0, 1, 1, 0]
+
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    result = ""
+    if request.method == "POST":
+        income = int(request.form["income"])
+        score = int(request.form["score"])
+
+        prediction = model.predict([[income, score]])
+
+        if prediction[0] == 1:
+            result = "✅ Credit Card Approved"
+        else:
+            result = "❌ Credit Card Rejected"
+
+    return render_template("index.html", result=result)
+
+if __name__ == "__main__":
+    app.run(debug=True)

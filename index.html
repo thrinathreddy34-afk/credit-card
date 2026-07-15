@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Card Approval Prediction</title>
+</head>
+<body>
+    <h2>Credit Card Approval Prediction</h2>
+
+    <form method="POST">
+        <label>Annual Income:</label><br>
+        <input type="number" name="income" required><br><br>
+
+        <label>Credit Score:</label><br>
+        <input type="number" name="score" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h3>{{ result }}</h3>
+</body>
+</html>
